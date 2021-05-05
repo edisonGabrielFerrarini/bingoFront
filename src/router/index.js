@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Cliente from '../views/form/Login'
+import Login from '../views/form/Login'
+import Cliente from '../views/cliente/Cliente'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/cliente',
     name: 'Cliente',
     component: Cliente
-  }
+  },
 ]
 
 const router = new VueRouter({

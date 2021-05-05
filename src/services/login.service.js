@@ -5,7 +5,9 @@ async function getUser(email, pass){
     {
       withCredentials: false,
       headers: {
-        'Content-Type':  'application/json',
+        'Content-Type':'application/json',
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
       },
       auth: {
         username: email,
@@ -13,7 +15,7 @@ async function getUser(email, pass){
       }
     }
   ).then((result) => {
-    result.data.body
+    return result.data.body
   })
 }
 
