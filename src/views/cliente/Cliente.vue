@@ -1,59 +1,25 @@
 <template>
   <v-main>
-    <v-app-bar 
-      app
-      dark
-    >
-      <v-toolbar-title>Application</v-toolbar-title>
-      <v-spacer></v-spacer>
-
-
-      <h1>{{info.saldo}}</h1>
-
-      <v-btn icon>
-        <v-icon
-          x-large
-        >mdi-diamond-stone</v-icon>
-      </v-btn>
-    <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    </v-app-bar>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      right
-      temporary
-    >
-    </v-navigation-drawer>
-
+    <Header :saldo="info.saldo"/>
     <v-main>
-      <v-container>
-        <v-row>
-        <v-col>
-              <h1
-                class="titulo-ganhador"
-              ></h1>
-              <v-btn icon>
-                <v-icon
-                  x-large
-                >mdi-trophy</v-icon>
-              </v-btn>
-            </v-col>
-        </v-row>
-      </v-container>
+      <Cartela />
     </v-main>
   </v-main>
 </template>
 
 <script>
 import { getUser } from '../../services/login.service'
+import Header from './header/Header.vue'
+import Cartela from './telas/Cartela.vue'
 
 export default {
+  components: { 
+    Header,
+    Cartela,
+  },
   data(){
     return {
       info: [],
-      drawer: null 
     }
   },
   created(){
@@ -69,7 +35,5 @@ export default {
 </script>
 
 <style>
-  .titulo-ganhador{
-    text-align: center;
-  }
+
 </style>
