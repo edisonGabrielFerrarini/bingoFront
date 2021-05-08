@@ -8,7 +8,7 @@
         <p>Cartela nº 10000</p>
       <v-flex>
         <v-card-text
-          class=" my-10"
+          class=" my-5"
         >
         <p>ESCOLHA {{ 20 - numerosEscolidos.length }} {{ numerosEscolidos.length == 19 ? 'NUMERO' : 'NUMEROS' }}</p>
           <v-btn v-for="n in 60" :key="n"
@@ -25,7 +25,15 @@
         </v-card-text>
       </v-flex>
       <v-flex>
-        <h1 class="mb-4" v-if="numerosEscolidos.length > 0">
+        <v-btn
+          @click="gerarNumerosAleatorios()"
+          color="secondary"
+        >
+          Gerar numeros aleatorios
+        </v-btn>
+      </v-flex>
+      <v-flex>
+        <h1 class="mb-4 mt-8" v-if="numerosEscolidos.length > 0">
           Numeros Escolhidos
         </h1>
         <v-btn v-for="n in numerosEscolidos" :key="n"
@@ -41,29 +49,19 @@
           </v-btn>
       </v-flex>
       <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
-        <h1 class="mb-4" >
-          Comprar Ticket
-        </h1>
-        <v-btn
-          width="150"
-          height="80"
-          color="primary"
-        >
-            Comprar
-          </v-btn>
-      </v-flex>
-      <v-flex>
-
+        <ModalTicket class="ml-0"/>
       </v-flex>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import ModalTicket from '../../../components/cliente/cartela/ModalTicket.vue'
 import Premiacao from '../../../components/cliente/cartela/Premiacao.vue'
 export default {
   components: {
-    Premiacao
+    Premiacao,
+    ModalTicket
   },
   data(){
     return {
@@ -73,6 +71,7 @@ export default {
         }
       ],
       numerosEscolidos: [],
+      comprar: false
     }
   },
   beforeMount(){
@@ -94,7 +93,7 @@ export default {
         }
       }
        if(this.numerosEscolidos.length > 0){
-        console.log(this.numerosEscolidos.sort(this.sorted))
+        this.numerosEscolidos.sort(this.sorted)
       }
     },
     sorted(a,b){
@@ -107,7 +106,40 @@ export default {
           bola.ativo = true
         } 
       })
+    },
+    gerarNumerosAleatorios(){
+      var list = []
+      this.value.forEach((bola) => {
+        bola.ativo = true
+      })
+      while (list.length < 20){
+          var numero = Math.ceil(Math.random() * (60 - 1) + 1)
+          var verificar = true
+          while (verificar){
+              if (list.indexOf(numero) == -1){
+                  verificar = false
+              }else {
+                  numero = Math.ceil(Math.random() * (60 - 1) + 1)
+              }
+          }
+          list.push(numero)
+      }
+      this.numerosEscolidos = list.map(it => {
+        this.ativarNumeros(it)
+        return it
+      })
+      this.numerosEscolidos.sort(this.sorted)
 
+    },
+    ativarNumeros(n){
+      this.value.forEach((bola) => {
+        if(bola.bola === n){
+          bola.ativo = false
+        } 
+      })
+    },
+    comprarTicket(){
+      console.log(this.numerosEscolidos);
     }
   }
 }
@@ -116,5 +148,9 @@ export default {
 <style>
   .bolas {
     border-radius: 50%;
+  }
+
+  .numeroAleatorio {
+    color: white;
   }
 </style>
