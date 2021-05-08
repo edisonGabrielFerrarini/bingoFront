@@ -10,7 +10,7 @@
         <v-card-text
           class=" my-10"
         >
-        <p>ESCOLHA 20 NUMEROS</p>
+        <p>ESCOLHA {{ 20 - numerosEscolidos.length }} {{ numerosEscolidos.length == 19 ? 'NUMERO' : 'NUMEROS' }}</p>
           <v-btn v-for="n in 60" :key="n"
             max-width="20"
             width="10"
@@ -23,6 +23,37 @@
             {{n}}
           </v-btn>
         </v-card-text>
+      </v-flex>
+      <v-flex>
+        <h1 class="mb-4" v-if="numerosEscolidos.length > 0">
+          Numeros Escolhidos
+        </h1>
+        <v-btn v-for="n in numerosEscolidos" :key="n"
+            max-width="20"
+            width="10"
+            height="60"
+            max-height="60"
+            class='ma-1 rounded-circle'
+            color="#8FE7E8"
+            @click="removerEscolhido(n)"
+          >
+            {{n}}
+          </v-btn>
+      </v-flex>
+      <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
+        <h1 class="mb-4" >
+          Comprar Ticket
+        </h1>
+        <v-btn
+          width="150"
+          height="80"
+          color="primary"
+        >
+            Comprar
+          </v-btn>
+      </v-flex>
+      <v-flex>
+
       </v-flex>
     </v-card-text>
   </v-card>
@@ -40,7 +71,8 @@ export default {
           bola: 0,
           ativo: true
         }
-      ]
+      ],
+      numerosEscolidos: [],
     }
   },
   beforeMount(){
@@ -53,11 +85,30 @@ export default {
   },
   methods: {
     escolha(x){
-      this.value[x].ativo = !this.value[x].ativo
-
-      console.log(this.value[x].bola);
-
+      if(this.numerosEscolidos.length < 20 || this.numerosEscolidos.indexOf(this.value[x].bola) != -1){
+        this.value[x].ativo = !this.value[x].ativo
+        if(this.value[x].ativo == false) {
+          this.numerosEscolidos.push(this.value[x].bola)
+        }else {
+          this.numerosEscolidos.splice(this.numerosEscolidos.indexOf(this.value[x].bola), 1)
+        }
+      }
+       if(this.numerosEscolidos.length > 0){
+        console.log(this.numerosEscolidos.sort(this.sorted))
+      }
     },
+    sorted(a,b){
+      return (a - b)
+    },
+    removerEscolhido(n){
+      this.numerosEscolidos.splice(this.numerosEscolidos.indexOf(n),1)
+      this.value.forEach((bola) => {
+        if(bola.bola === n){
+          bola.ativo = true
+        } 
+      })
+
+    }
   }
 }
 </script>

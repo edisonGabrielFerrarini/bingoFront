@@ -6,7 +6,10 @@
       <div
         class="btn-hamburguer"
       >
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-btn @click="drawer = !drawer">
+          <v-icon
+          >mdi-menu</v-icon>
+        </v-btn>
       </div>
 
       <div
@@ -57,7 +60,7 @@ export default {
   },
   data(){
     return {
-      drawer: null 
+      drawer: false 
     }
   },
 
