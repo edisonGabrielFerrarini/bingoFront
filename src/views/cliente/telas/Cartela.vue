@@ -54,6 +54,9 @@ export default {
   methods: {
     escolha(x){
       this.value[x].ativo = !this.value[x].ativo
+
+      console.log(this.value[x].bola);
+
     },
   }
 }

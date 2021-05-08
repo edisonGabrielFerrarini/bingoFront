@@ -1,48 +1,43 @@
 <template>
   <v-card
+    dark
   >
-    <v-toolbar
-      dark
-      flat
-    >
-      <v-toolbar-title>
-        Game da Sena
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    </v-toolbar>
-    
-    <v-toolbar
-      flat
-      dark
-      height="100%"
-    >
-    <v-row
-      justify="center"
-      class="mt-10"
-    > 
-    <div>
-      <p class="my-0 ma-0 mr-10 text-center">Saldo </p>
-      <h1
-        class="pr-10 pb-10"
+    <div class="toolbar">
+      <div
+        class="btn-hamburguer"
       >
-        <v-btn icon>
-          <v-icon
-            x-large
-          >mdi-diamond-stone</v-icon>
-        </v-btn>
-        1000{{saldo}}
-        <v-btn icon>
-          <v-icon
-            x-large
-          >mdi-diamond-stone</v-icon>
-        </v-btn>
-      </h1>
-    </div>
-    </v-row>
-    </v-toolbar>
-    <v-spacer></v-spacer>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      </div>
 
+      <div
+        class="container-img"
+      >
+        <v-img
+          src="@/assets/Final.png"
+          class="imagem"
+          height="150"
+          width="150"
+        ></v-img>
+      </div>
+      
+      <div class="row">
+        <p class="p-saldo">Saldo</p>
+        <div> 
+          <v-btn 
+          icon>
+            <v-icon
+              x-large
+            >mdi-diamond-stone</v-icon>
+          </v-btn>
+          <h1 class="saldo">1000{{saldo}}</h1>  
+          <v-btn icon>
+            <v-icon
+              x-large
+            >mdi-diamond-stone</v-icon>
+          </v-btn>
+        </div>
+      </div>
+    </div>
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -70,5 +65,66 @@ export default {
 </script>
 
 <style>
+  .imagem-logo {
+    width: 30%;
+    height: 30%;
+    border: 1px solid black;
+  }
+
+  .saldo {
+    display: inline;
+    position: relative;
+    top: 8%;
+  }
+
+  .p-saldo {
+    position: absolute;
+    top: 40%;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    text-align: right;
+  }
+
+  .row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .container-img {
+    position: absolute;
+    left: 5%;
+  }
+
+  .btn-hamburguer{
+    position: relative;
+    top: 40%;
+    right: 2%; 
+  }
+
+  @media (min-width: 0) and (max-width: 600px) {
+    .container-img {
+      width: 100%;
+      height: 30px;
+      position: absolute;
+      top: -30px;
+      left: 0;
+    }
+
+    .p-saldo {
+      position: absolute;
+      top: 25%;
+    }
+
+    .row {
+      position: relative;
+      top: 20px;
+    }
+  }
 
 </style>
