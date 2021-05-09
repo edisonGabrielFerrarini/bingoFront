@@ -1,8 +1,10 @@
 import axios from 'axios'
 
 async function getUser(email, pass){
-  return axios.get('http://localhost:8080/api/cliente/busca/1', 
-    {
+  return axios.post('http://192.168.0.11:8080/api/users/login',{
+    'email': email
+  },
+  {
       withCredentials: false,
       headers: {
         'Content-Type':'application/json',
@@ -15,7 +17,7 @@ async function getUser(email, pass){
       }
     }
   ).then((result) => {
-    return result.data.body
+    return result
   })
 }
 

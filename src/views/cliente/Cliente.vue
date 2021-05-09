@@ -2,7 +2,7 @@
   <v-main>
     <Header :saldo="info.saldo"/>
     <v-main>
-      <Cartela />
+      <Cartela/>
     </v-main>
   </v-main>
 </template>
@@ -11,6 +11,7 @@
 import { getUser } from '../../services/login.service'
 import Header from './header/Header.vue'
 import Cartela from './telas/Cartela.vue'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   components: { 
@@ -22,14 +23,11 @@ export default {
       info: [],
     }
   },
-  created(){
-    this.init()
+  computed: {
+    ...mapGetters(['getInformacoes'])
   },
   methods: {
-    async init(){
-      const usuario = await getUser('egf22@hotmail.com', '123')
-      this.info = usuario
-    }
+    ...mapActions(['actionInformacoes']),
   }
 }
 </script>

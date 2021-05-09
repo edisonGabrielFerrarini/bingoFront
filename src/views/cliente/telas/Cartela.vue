@@ -4,8 +4,8 @@
     class="text-center my-12"
   >
     <v-card-text>
-      <Premiacao valor="500.000.000"/>
-        <p>Cartela nº 10000</p>
+      <Premiacao :valor="premio"/>
+        <p>Cartela nº {{idCartela}}</p>
       <v-flex>
         <v-card-text
           class=" my-5"
@@ -49,7 +49,7 @@
           </v-btn>
       </v-flex>
       <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
-        <ModalTicket class="ml-0"/>
+        <ModalTicket class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="500000000"/>
       </v-flex>
     </v-card-text>
   </v-card>
@@ -58,10 +58,15 @@
 <script>
 import ModalTicket from '../../../components/cliente/cartela/ModalTicket.vue'
 import Premiacao from '../../../components/cliente/cartela/Premiacao.vue'
+import { getCartela } from '../../../services/cartela.service'
+import {mapGetters} from 'vuex'
 export default {
   components: {
     Premiacao,
     ModalTicket
+  },
+  computed: {
+    ...mapGetters(['getInformacoes'])
   },
   data(){
     return {
@@ -71,7 +76,10 @@ export default {
         }
       ],
       numerosEscolidos: [],
-      comprar: false
+      comprar: false,
+      idCartela: null,
+      premio: null,
+      valor_numero: null,
     }
   },
   beforeMount(){
@@ -82,7 +90,16 @@ export default {
       })
     }
   },
+  created(){
+    this.init()
+  },  
   methods: {
+    async init(){
+      var cartela = await getCartela()
+      this.idCartela = cartela.id
+      this.premio = cartela.valor
+      this.valor_numero = cartela.valor_numero
+    },
     escolha(x){
       if(this.numerosEscolidos.length < 20 || this.numerosEscolidos.indexOf(this.value[x].bola) != -1){
         this.value[x].ativo = !this.value[x].ativo
@@ -138,9 +155,6 @@ export default {
         } 
       })
     },
-    comprarTicket(){
-      console.log(this.numerosEscolidos);
-    }
   }
 }
 </script>

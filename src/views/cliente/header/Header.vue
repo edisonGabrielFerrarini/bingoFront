@@ -32,7 +32,7 @@
               x-large
             >mdi-diamond-stone</v-icon>
           </v-btn>
-          <h1 class="saldo">1000{{saldo}}</h1>  
+          <h1 class="saldo">{{getInformacoes.saldo}}</h1>  
           <v-btn icon>
             <v-icon
               x-large
@@ -52,11 +52,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   components: {
   },
-  props: {
-    saldo: Number
+  computed: {
+    ...mapGetters(['getInformacoes'])
   },
   data(){
     return {
