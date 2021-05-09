@@ -23,6 +23,11 @@ export default {
       info: [],
     }
   },
+  created(){
+    if(this.getInformacoes.id == null){
+      this.$router.push('Login')
+    }
+  },
   computed: {
     ...mapGetters(['getInformacoes'])
   },

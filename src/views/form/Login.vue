@@ -8,17 +8,17 @@
       src="@/assets/Final.png"
     ></v-img>
   <v-card-text>
-  <form
-    class="text-center "
+  <v-form
+    class="text-center"
+    ref="form"
+    v-model="valid"
+    lazy-validation
   >
     <v-text-field
-      class="mx-2"
       v-model="email"
-      :error-messages="emailErrors"
+      :rules="emailRules"
       label="E-mail"
       required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
     ></v-text-field>
     <v-text-field
       class="mx-2"
@@ -52,8 +52,24 @@
         Cadastre-se
       </v-btn>
     </div>
-  </form>
+  </v-form>
   </v-card-text>
+  <v-snackbar
+      v-model="snackbar"
+      top
+    >
+      Usuário ou senha incorretos
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -72,42 +88,40 @@
     },
 
     data: () => ({
+      snackbar: false,
+      valid: true,
       email: '',
+      emailRules: [
+        v => !!v || 'E-mail é obrigatório',
+        v => /.+@.+\..+/.test(v) || 'E-mail não é valido',
+      ],
       password: '',
       show: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters',
+        required: value => !!value || 'Senha é obrigatória.',
+        min: v => v.length >= 8 || 'Mínimo 8 characters',
         },
     }),
 
-    computed: {
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('Must be valid e-mail')
-        !this.$v.email.required && errors.push('E-mail is required')
-        return errors
-      },
-      
-    },
 
     methods: {
       ...mapActions(['actionInformacoes']),
       
       submit () {
-        this.init()
+        if(this.$refs.form.validate()){
+          this.init()
+        }
       },
-
 
       async init(){
         try{
           const usuario = await getUser(this.email, this.password)
           if(usuario.status === 200){
             this.actionInformacoes(usuario.data)
-            this.$router.push('Cliente')
+            this.$router.push('cliente')
           }
         }catch(e){
+          this.snackbar = true
           console.log('erro ao consultar usuario');
         }
 

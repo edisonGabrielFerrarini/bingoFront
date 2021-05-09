@@ -49,7 +49,7 @@
           </v-btn>
       </v-flex>
       <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
-        <ModalTicket class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="500000000"/>
+        <ModalTicket class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="premio"/>
       </v-flex>
     </v-card-text>
   </v-card>
