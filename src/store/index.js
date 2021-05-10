@@ -44,6 +44,41 @@ const modulesCliente = {
   }
 }
 
+const modulesSnackBar = {
+  state: {
+    snackBarStates: {
+      snackbar: false,
+      sucesso: true,
+      text: 'Sua compra foi efetuada com sucesso',
+    } 
+  },
+  getters: {
+    getSnackBarStates(state){
+      return state.snackBarStates
+    }
+
+  },
+  mutations: {
+    setSnackBarStates(states, payload){
+      console.log(payload);
+      states.snackBarStates.snackbar = payload.snackbar,
+      states.snackBarStates.sucesso = payload.sucesso,
+      states.snackBarStates.text = payload.text
+    },
+    setFecharSnackBar(states, payload){
+      states.snackBar = payload.snackBar
+    }
+  },
+  actions: {
+    snackBarAction({commit}, payload){
+      commit('setSnackBarStates', payload)
+    },
+    fecharSnackBar({commit}, payload){
+      commit('setFecharSnackBar', payload)
+    }
+  }
+}
+
 export default new Vuex.Store({
   state: {
   },
@@ -52,7 +87,8 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    cliente: modulesCliente
+    cliente: modulesCliente,
+    snackBar: modulesSnackBar
   }
 })
 

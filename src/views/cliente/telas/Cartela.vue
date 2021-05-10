@@ -49,7 +49,7 @@
           </v-btn>
       </v-flex>
       <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
-        <ModalTicket class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="premio" :valor_bilhete="200"/>
+        <ModalTicket @clear="clear" class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="premio" :valor_bilhete="200"/>
       </v-flex>
     </v-card-text>
   </v-card>
@@ -59,11 +59,13 @@
 import ModalTicket from '../../../components/cliente/cartela/ModalTicket.vue'
 import Premiacao from '../../../components/cliente/cartela/Premiacao.vue'
 import { getCartela } from '../../../services/cartela.service'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
+import SnackBar from '../../../components/cliente/cartela/SnackBar.vue'
 export default {
   components: {
     Premiacao,
-    ModalTicket
+    ModalTicket,
+    SnackBar
   },
   computed: {
     ...mapGetters(['getInformacoes'])
@@ -80,6 +82,10 @@ export default {
       idCartela: null,
       premio: null,
       valor_numero: null,
+      snackbar: false,
+      sucesso: true,
+      text: '',
+      color: ''
     }
   },
   beforeMount(){
@@ -94,11 +100,19 @@ export default {
     this.init()
   },  
   methods: {
+    ...mapActions(['snackBarAction']),
+
     async init(){
       var cartela = await getCartela()
       this.idCartela = cartela.id
       this.premio = cartela.valor
       this.valor_numero = cartela.valor_numero
+    },
+    clear(){
+      this.numerosEscolidos = []
+      this.value.forEach((bola) => {
+        bola.ativo = true
+      })
     },
     escolha(x){
       if(this.numerosEscolidos.length < 20 || this.numerosEscolidos.indexOf(this.value[x].bola) != -1){

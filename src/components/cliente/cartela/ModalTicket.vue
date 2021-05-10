@@ -50,34 +50,56 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-snackbar
-      v-model="snackbar"
-      top
+
+    <v-dialog
+      v-model="dialogCompra"
+      max-width="290"
+      @click:outside="fechar()"
     >
-      {{ text }}
-      
-      <template v-if="sucesso" v-slot:action="{ attrs }">
-        <v-btn
+      <v-card
+        class="text-center"
+      >
+        <v-card-text v-if="sucesso">
+          <p class="pt-10">
+            {{text}}
+          </p>
+          <v-btn
           color="blue lighten-2"
           text
           v-bind="attrs"
-          @click="snackbar = false"
-        >
+          >
           <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
-      </template>
+          </v-btn>
+        </v-card-text>
 
-      <template v-else v-slot:action="{ attrs }">
-        <v-btn
+        <v-card-text v-else>
+          <p
+            class="pt-10"
+          >
+            {{text}}
+          </p>
+          <v-btn
           color="red lighten-2"
           text
           v-bind="attrs"
-          @click="snackbar = false"
-        >
+          >
           <v-icon>mdi-thumb-down</v-icon>
-        </v-btn>
-      </template>
-    </v-snackbar>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="red darken-1"
+            text
+            @click="fechar()"
+          >
+            Fechar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 
@@ -98,6 +120,7 @@ import { getCartela } from '../../../services/cartela.service'
       snackbar: false,
       sucesso: true,
       dialog: false,
+      dialogCompra: false,
       text: '',
       color: ''
     }
@@ -106,7 +129,14 @@ import { getCartela } from '../../../services/cartela.service'
     ...mapGetters(['getInformacoes'])
   },
   methods: {
-    ...mapActions(['updateSaldo']),
+    ...mapActions(['updateSaldo', 'snackBarAction']),
+
+    fechar(){
+      this.dialogCompra = false
+      if(this.sucesso){
+        this.$emit('clear')
+      }
+    },
 
     async enviar(){
       try{
@@ -115,21 +145,20 @@ import { getCartela } from '../../../services/cartela.service'
           if(response.status === 202 || response.status === 200){
             this.updateSaldo(response.data.valor);
             this.dialog = false
-            this.snackbar = true
+            this.dialogCompra = true
             this.sucesso = true
             this.text = 'Sua compra foi efetuada com sucesso'
-            this.color = 'success'
           }
         }else{
             this.dialog = false
-            this.snackbar = true
+            this.dialogCompra = true
             this.sucesso = false
             this.text = 'Seu saldo é insuficiente'
             this.color = 'warning'
         }
       }catch(e){
             this.dialog = false
-            this.snackbar = true
+            this.dialogCompra = true
             this.sucesso = false
             this.text = 'Ocorreu um erro ao ralizar a compra'
             this.color = 'warning'
