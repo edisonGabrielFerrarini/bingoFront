@@ -104,6 +104,12 @@
     }),
 
 
+    async created(){
+      if(localStorage.getItem('user') && localStorage.getItem('pass')){
+        this.$router.push('cliente/cartela')
+      }
+    },
+
     methods: {
       ...mapActions(['actionInformacoes']),
       
@@ -116,13 +122,14 @@
       async init(){
         try{
           const usuario = await getUser(this.email, this.password)
-          if(usuario.status === 200){
-            this.actionInformacoes(usuario.data)
-            this.$router.push('cliente')
-          }
+            if(usuario.status === 200){
+              this.actionInformacoes(usuario.data)
+              localStorage.setItem('pass', this.password)
+              localStorage.setItem('user', this.email)
+              this.$router.push('cliente/cartela')
+            }
         }catch(e){
           this.snackbar = true
-          console.log('erro ao consultar usuario');
         }
 
 

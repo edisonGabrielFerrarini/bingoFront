@@ -2,16 +2,17 @@
   <v-card
     dark
   >
-    <div class="toolbar">
-      <div
-        class="btn-hamburguer"
-      >
-        <v-btn @click="drawer = !drawer">
-          <v-icon
-          >mdi-menu</v-icon>
-        </v-btn>
-      </div>
-
+      <v-btn
+        right
+        absolute
+        top
+        large
+        class="mt-10 btn-hamburguer"
+        @click="drawer = !drawer">
+      <v-icon
+        >mdi-menu</v-icon>
+      </v-btn>
+      <div class="toolbar">
       <div
         class="container-img"
       >
@@ -23,20 +24,18 @@
         ></v-img>
       </div>
       
-      <div class="row">
+      <div class="row mt-10">
         <p class="p-saldo">Saldo</p>
         <div> 
           <v-btn 
           icon>
             <v-icon
-              x-large
             >mdi-diamond-stone</v-icon>
           </v-btn>
           <h1 class="saldo">{{getInformacoes.saldo}}</h1>  
           <v-btn icon>
             <v-icon
-              x-large
-            >mdi-diamond-stone</v-icon>
+              >mdi-diamond-stone</v-icon>
           </v-btn>
         </div>
       </div>
@@ -47,6 +46,57 @@
       right
       temporary
     >
+      <v-list
+        nav
+        dense
+        class="text-center mt-12"
+      >
+        <v-list-item-group
+        >
+
+        <router-link to="cartela">
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title>
+                Cartela
+            </v-list-item-title>
+          </v-list-item>
+        </router-link>
+
+        <router-link to="dados">
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title>Meus Dados</v-list-item-title>
+          </v-list-item>
+        </router-link>
+          
+        <router-link to="tickets">
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title>
+              Meus Tickets
+            </v-list-item-title>
+          </v-list-item>
+        </router-link>
+
+        <router-link to="ganhadores">
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title>Ganhadores</v-list-item-title>
+          </v-list-item>
+        </router-link>
+
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title @click="sair()">Sair</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-navigation-drawer>
     </v-card>
 </template>
@@ -64,11 +114,21 @@ export default {
       drawer: false 
     }
   },
-
+  methods: {
+    sair(){
+      localStorage.clear()
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
 <style>
+
+  a {
+     text-decoration: none;
+ }
+
   .imagem-logo {
     width: 30%;
     height: 30%;
@@ -106,9 +166,7 @@ export default {
   }
 
   .btn-hamburguer{
-    position: relative;
-    top: 40%;
-    right: 2%; 
+    z-index: 1;
   }
 
   @media (min-width: 0) and (max-width: 600px) {

@@ -2,28 +2,32 @@
   <v-main>
     <Header :saldo="info.saldo"/>
     <v-main>
-      <Cartela/>
+      <router-view />
     </v-main>
   </v-main>
 </template>
 
 <script>
-import { getUser } from '../../services/login.service'
 import Header from './header/Header.vue'
-import Cartela from './telas/Cartela.vue'
 import {mapActions, mapGetters} from 'vuex'
+import { getUser } from '../../services/login.service'
 
 export default {
   components: { 
     Header,
-    Cartela,
   },
   data(){
     return {
       info: [],
     }
   },
-  created(){
+  async created(){
+    if(localStorage.getItem('user') && localStorage.getItem('pass')){
+        const usuario = await getUser(localStorage.getItem('user'), localStorage.getItem('pass'))
+        if(usuario.status === 200){
+          this.actionInformacoes(usuario.data)
+        }
+      }
     if(this.getInformacoes.id == null){
       this.$router.push('Login')
     }
@@ -38,5 +42,6 @@ export default {
 </script>
 
 <style>
+   
 
 </style>

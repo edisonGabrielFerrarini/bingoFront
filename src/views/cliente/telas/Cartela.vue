@@ -2,6 +2,7 @@
   <v-card
     flat
     class="text-center my-12"
+    v-if="cartelaAtiva"
   >
     <v-card-text>
       <Premiacao :valor="premio"/>
@@ -17,7 +18,7 @@
             height="60"
             max-height="60"
             class='ma-1 rounded-circle'
-            :color="value[n].ativo ? 'green' : 'yellow'"
+            :color="value[n].ativo ? 'yellow' : 'green'"
             @click="escolha(n)"
           >
             {{n}}
@@ -53,6 +54,11 @@
       </v-flex>
     </v-card-text>
   </v-card>
+  <v-card v-else class="my-10">
+    <v-card-text class="text-center my-12">
+      <h1 class="my-12">Não há nenhuma tabela ativa</h1>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -85,7 +91,8 @@ export default {
       snackbar: false,
       sucesso: true,
       text: '',
-      color: ''
+      color: '',
+      cartelaAtiva: true
     }
   },
   beforeMount(){
@@ -103,10 +110,15 @@ export default {
     ...mapActions(['snackBarAction']),
 
     async init(){
-      var cartela = await getCartela()
-      this.idCartela = cartela.id
-      this.premio = cartela.valor
-      this.valor_numero = cartela.valor_numero
+      try{
+        var cartela = await getCartela()
+        this.idCartela = cartela.id
+        this.premio = cartela.valor
+        this.valor_numero = cartela.valor_numero
+        this.cartelaAtiva = true
+      }catch(e){
+        this.cartelaAtiva = false
+      }
     },
     clear(){
       this.numerosEscolidos = []
