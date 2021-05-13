@@ -6,6 +6,14 @@ import Cartela from '../views/cliente/telas/Cartela'
 import Ticket from '../views/cliente/telas/Tickets'
 import Dados from '../views/cliente/telas/Dados'
 import Ganhadores from '../views/cliente/telas/Ganhadores'
+import Admin from '../views/admin/Admin'
+import CartelaAdmin from '../views/admin/telas/CartelaAdmin'
+import AdminArea from '../views/admin/telas/AdminArea'
+import Agente from '../views/admin/telas/Agente'
+import ClientesAdmin from '../views/admin/telas/ClientesAdmin'
+import Gerente from '../views/admin/telas/Gerente'
+import GanhadoresAdmin from '../views/admin/telas/GanhadoresAdmin'
+
 
 Vue.use(VueRouter)
 
@@ -14,6 +22,43 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    children: [
+      {
+        path: 'cartela-admin',
+        component: CartelaAdmin,
+        name: 'cartela-admin'
+      },
+      {
+        path: 'clientes',
+        component: ClientesAdmin,
+        name: 'clientes'
+      },
+      {
+        path: 'configura',
+        component: AdminArea,
+        name: 'configura'
+      },
+      {
+        path: 'ganhadores',
+        component: GanhadoresAdmin,
+        name: 'ganhadores'
+      },
+      {
+        path: 'agente',
+        component: Agente,
+        name: 'agente'
+      },
+      {
+        path: 'gerente',
+        component: Gerente,
+        name: 'gerente'
+      }
+    ]
   },
   {
     path: '/cliente',
