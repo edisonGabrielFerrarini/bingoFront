@@ -3,14 +3,33 @@
     <div
       class="text-center">
         <v-btn
-          width="100%"
           height="50"
-          color="success"
+          color="info"
           @click="sortear()"
-        >iniciar sorteio</v-btn>
+        >buscar ativa</v-btn>
       </div>
 
-       <v-dialog
+    <div v-if="cartela.ativar">
+      <v-form>
+        <v-text-field
+          label="Concurso"
+          v-model="cartela.id"
+        ></v-text-field>
+        <v-text-field
+          label="Prêmio"
+          v-model="cartela.valor"
+        ></v-text-field>
+        <v-text-field
+          label="Rendimentos da Cartela Ativa"
+          v-model="cartela.rendimentos"
+        ></v-text-field>
+      </v-form>
+    </div>
+
+
+
+
+    <v-dialog
       v-model="dialog.ativar"
       max-width="290"
     >
@@ -47,10 +66,16 @@
 </template>
 
 <script>
-import {sorteia} from '../../../services/admin.service'
+import {obterCartelaAtiva} from '../../../services/admin.service'
 export default {
   data(){
     return {
+      cartela: {
+        id: '',
+        valor: '',
+        rendimentos: '',
+        ativar: false
+      },
       dialog: {
         ativar: false,
         text: '',
@@ -62,24 +87,24 @@ export default {
   methods: {
     async sortear(){
       try{
-        const resultado = await sorteia()
-        if(resultado === 'Não há cartela ativa'){
-          this.dialog.ativar = true
-          this.dialog.text = resultado
-          this.dialog.icon = 'mdi-thumb-down'
-          this.dialog.color = 'red'
-        }else if(resultado === 'Não houve ganhadores, sua cartela foi acumulada'){
-          this.dialog.ativar = true
-          this.dialog.text = resultado
-          this.dialog.icon = 'mdi-thumb-down'
-          this.dialog.color = 'error'
-        }
+        const resultado = await obterCartelaAtiva()
+        this.cartela.id = resultado.id
+        this.cartela.valor = resultado.valor
+        this.cartela.rendimentos = resultado.rendimentos
+        this.cartela.ativar = true
       }catch(e){
+        this.cartela.ativar = false
+        this.cartela.id = 0
+        this.cartela.valor = 0
+        this.cartela.rendimentos = 0
+        
+
         this.dialog.ativar = true
-        this.dialog.text = 'Não há cartelas'
+        this.dialog.text = 'Cartela não encontrada'
         this.dialog.icon = 'mdi-thumb-down'
-        this.dialog.color = 'error'
+        this.dialog.color = 'red'
       }
+      
     }
   }
 }

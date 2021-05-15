@@ -5,12 +5,12 @@
         <v-btn
           width="100%"
           height="50"
-          color="success"
-          @click="sortear()"
-        >iniciar sorteio</v-btn>
+          color="error"
+          @click="cancelar()"
+        >Cancelar Sorteios</v-btn>
       </div>
 
-       <v-dialog
+    <v-dialog
       v-model="dialog.ativar"
       max-width="290"
     >
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import {sorteia} from '../../../services/admin.service'
+import {cancelarCartela} from '../../../services/admin.service'
 export default {
   data(){
     return {
@@ -60,25 +60,18 @@ export default {
     }
   },
   methods: {
-    async sortear(){
-      try{
-        const resultado = await sorteia()
-        if(resultado === 'Não há cartela ativa'){
-          this.dialog.ativar = true
-          this.dialog.text = resultado
-          this.dialog.icon = 'mdi-thumb-down'
-          this.dialog.color = 'red'
-        }else if(resultado === 'Não houve ganhadores, sua cartela foi acumulada'){
-          this.dialog.ativar = true
-          this.dialog.text = resultado
-          this.dialog.icon = 'mdi-thumb-down'
-          this.dialog.color = 'error'
-        }
+    async cancelar(){
+      try {
+        const resultado = await cancelarCartela()
+        this.dialog.ativar = true
+        this.dialog.text = `Cartela concurso: ${resultado.id} foi cancelada com sucesso`
+        this.dialog.icon = 'mdi-thumb-up'
+        this.dialog.color = 'green'
       }catch(e){
         this.dialog.ativar = true
-        this.dialog.text = 'Não há cartelas'
+        this.dialog.text = `Não foi encontrada nenhuma cartela ativa`
         this.dialog.icon = 'mdi-thumb-down'
-        this.dialog.color = 'error'
+        this.dialog.color = 'red'
       }
     }
   }

@@ -37,7 +37,7 @@
                   CARTELA ATIVA
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <CartelaAtiva />
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -48,7 +48,29 @@
                   CANCELAR CARTELA
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <CancelarCartela />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          
+            <v-expansion-panels>
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                  ÚLTIMOS SORTEIOS
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <UltimosSorteios />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <v-expansion-panels>
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                  TODOS SORTEIOS
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <TodosSorteios />
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -60,12 +82,20 @@
 
 <script>
 import FormCreateCartela from '../../../components/admin/cartela/FormCreateCartela.vue'
+import CartelaAtiva from '../../../components/admin/cartela/VerificaAtiva'
 import GerarSorteio from '../../../components/admin/cartela/GerarSorteio.vue'
+import CancelarCartela from '../../../components/admin/cartela/CancelarCartela.vue'
+import UltimosSorteios from '../../../components/admin/cartela/UltimosSorteios.vue'
+import TodosSorteios from '../../../components/admin/cartela/TodosSorteios.vue'
 
 export default {
   components: { 
     FormCreateCartela,
-    GerarSorteio
+    CartelaAtiva,
+    GerarSorteio,
+    CancelarCartela,
+    UltimosSorteios,
+    TodosSorteios
   },
   data(){
     return {
