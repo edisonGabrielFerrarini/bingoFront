@@ -1,8 +1,5 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar app>
-    </v-system-bar>
-
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -48,6 +45,7 @@
       drawer: null,
       links: [
         ['mdi-cards-club', 'Cartela', 'cartela-admin'],
+        ['mdi-seal', 'Sorteio', 'sorteio'],
         ['mdi-account-settings', 'Clientes', 'clientes'],
         ['mdi-trophy', 'Ganhadores', 'ganhadores'],
         ['mdi-badge-account-horizontal', 'Admins', 'configura'],

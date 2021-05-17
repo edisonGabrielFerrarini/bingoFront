@@ -50,13 +50,13 @@
           </v-btn>
       </v-flex>
       <v-flex class="mt-10" v-if="numerosEscolidos.length == 20">
-        <ModalTicket @clear="clear" class="ml-0" :idCliente="getInformacoes.id" :id="1" :numerosEscolhidos="numerosEscolidos" :premio="premio" :valor_bilhete="200"/>
+        <ModalTicket @clear="clear" class="ml-0" :idCliente="getInformacoes.id" :id="idCartela" :numerosEscolhidos="numerosEscolidos" :premio="premio" :valor_bilhete="valor_numero"/>
       </v-flex>
     </v-card-text>
   </v-card>
   <v-card v-else class="my-10">
     <v-card-text class="text-center my-12">
-      <h1 class="my-12">Não há nenhuma tabela ativa</h1>
+      <h1 class="my-12">Não há nenhuma cartela ativa</h1>
     </v-card-text>
   </v-card>
 </template>

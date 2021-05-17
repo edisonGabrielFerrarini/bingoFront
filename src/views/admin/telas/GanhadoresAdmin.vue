@@ -24,7 +24,7 @@
             <div>Id Ganhador: {{ ganhador.id }}</div>
             <div>Estado: {{ ganhador.estado }}</div>
             <div>Prêmio: {{ ganhador.valor_premio }}</div>
-            <div>Numeros Escolhidos: {{ ganhador.numeros }}</div>
+            <div>Numeros Escolhidos: {{ ganhador.numeros.toString().replace('[','').replace(']','') }}</div>
             <div>data: {{ ganhador.data_premio.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1') }}</div>
           </v-card-text>
           </v-card>
@@ -44,8 +44,9 @@ export default {
   },
   async created(){
     var responseGanhadores = await getGanhadores()
-    this.ganhadores.push(responseGanhadores.content[0])
-    console.log(this.ganhadores);
+    responseGanhadores.content.map((it)=>{
+      this.ganhadores.push(it)
+    })
   }
 }
 </script>

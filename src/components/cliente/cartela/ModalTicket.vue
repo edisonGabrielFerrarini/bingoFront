@@ -66,7 +66,6 @@
           <v-btn
           color="blue lighten-2"
           text
-          v-bind="attrs"
           >
           <v-icon>mdi-thumb-up</v-icon>
           </v-btn>
@@ -81,7 +80,6 @@
           <v-btn
           color="red lighten-2"
           text
-          v-bind="attrs"
           >
           <v-icon>mdi-thumb-down</v-icon>
           </v-btn>

@@ -90,6 +90,14 @@
           </v-list-item>
         </router-link>
 
+        <router-link to="sorteios">
+          <v-list-item
+            class="py-3"
+          >
+            <v-list-item-title>Sorteios</v-list-item-title>
+          </v-list-item>
+        </router-link>
+
           <v-list-item
             class="py-3"
           >

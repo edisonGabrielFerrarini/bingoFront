@@ -16,6 +16,10 @@
           v-model="cartela.id"
         ></v-text-field>
         <v-text-field
+          label="Valor por Ticket"
+          v-model="cartela.valor_ticket"
+        ></v-text-field>
+        <v-text-field
           label="Prêmio"
           v-model="cartela.valor"
         ></v-text-field>
@@ -74,6 +78,7 @@ export default {
         id: '',
         valor: '',
         rendimentos: '',
+        valor_ticket: '',
         ativar: false
       },
       dialog: {
@@ -91,12 +96,15 @@ export default {
         this.cartela.id = resultado.id
         this.cartela.valor = resultado.valor
         this.cartela.rendimentos = resultado.rendimentos
+        this.cartela.valor_ticket = resultado.valor_numero
+        
         this.cartela.ativar = true
       }catch(e){
         this.cartela.ativar = false
         this.cartela.id = 0
         this.cartela.valor = 0
         this.cartela.rendimentos = 0
+        this.cartela.valor_ticket = 0
         
 
         this.dialog.ativar = true

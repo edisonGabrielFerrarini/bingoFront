@@ -14,13 +14,15 @@
       v-model="dialog.ativar"
       max-width="290"
     >
-      <v-card>
-        <v-card-title class="headline">
-          Cartela
-        </v-card-title>
-
+      <v-card class="pt-10">
         <v-card-text class="text-center">
           {{dialog.text}}
+        </v-card-text>
+        <v-card-text class="text-center">
+          {{dialog.ganhadores}}
+        </v-card-text>
+        <v-card-text class="text-center">
+          {{dialog.numeros}}
         </v-card-text>
         <div
           class="text-center"
@@ -51,9 +53,13 @@ import {sorteia} from '../../../services/admin.service'
 export default {
   data(){
     return {
+      info: '',
+      numeros: '',
       dialog: {
         ativar: false,
         text: '',
+        ganhadores: '',
+        numeros: '',
         icon: '',
         color: ''
       },
@@ -73,10 +79,21 @@ export default {
           this.dialog.text = resultado
           this.dialog.icon = 'mdi-thumb-down'
           this.dialog.color = 'error'
+        }else{
+          resultado.map((it)=>{
+            this.dialog.ganhadores += ` id: ${it.id_cliente} nome: ${it.nome} \n`
+          })
+          this.dialog.numeros = `numeros: \n ${resultado[0].numeros.toString().replace('[','').replace(']','')}`
+          this.dialog.ativar = true
+          this.dialog.text = `Ganhadores`
+          this.dialog.icon = 'mdi-thumb-up'
+          this.dialog.color = 'success'
         }
       }catch(e){
         this.dialog.ativar = true
         this.dialog.text = 'Não há cartelas'
+        this.dialog.ganhadores = ''
+        this.dialog.numeros = ''
         this.dialog.icon = 'mdi-thumb-down'
         this.dialog.color = 'error'
       }

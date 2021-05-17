@@ -7,7 +7,7 @@
           height="50"
           color="error"
           @click="cancelar()"
-        >Cancelar Sorteios</v-btn>
+        >Cancelar Cartela</v-btn>
       </div>
 
     <v-dialog

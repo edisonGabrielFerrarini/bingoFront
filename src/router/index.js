@@ -13,6 +13,8 @@ import Agente from '../views/admin/telas/Agente'
 import ClientesAdmin from '../views/admin/telas/ClientesAdmin'
 import Gerente from '../views/admin/telas/Gerente'
 import GanhadoresAdmin from '../views/admin/telas/GanhadoresAdmin'
+import Sorteios from '../views/cliente/telas/Sorteios'
+import Sorteio from '../views/admin/telas/Sorteio'
 
 
 Vue.use(VueRouter)
@@ -57,7 +59,12 @@ const routes = [
         path: 'gerente',
         component: Gerente,
         name: 'gerente'
-      }
+      },
+      {
+        path: 'sorteio',
+        component: Sorteio,
+        name: 'sorteio'
+      },
     ]
   },
   {
@@ -69,6 +76,11 @@ const routes = [
         path: 'cartela',
         component: Cartela,
         name: 'cartela'
+      },
+      {
+        path: 'sorteios',
+        component: Sorteios,
+        name: 'sorteios'
       },
       {
         path: 'tickets',

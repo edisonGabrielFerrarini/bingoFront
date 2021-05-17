@@ -13,34 +13,37 @@
               :value="panel"
               multiple
             >
-              <v-expansion-panel>
-                <v-expansion-panel-header>
-                  GERAR CARTELA
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                  <FormCreateCartela />
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            
 
               <v-expansion-panel>
                 <v-expansion-panel-header>
-                  CARTELA ATIVA
+                  GERAR SORTEIO
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <CartelaAtiva />
+                  <GerarSorteio />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+          
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                  ÚLTIMOS SORTEIOS
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <UltimosSorteios />
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
               <v-expansion-panel>
                 <v-expansion-panel-header>
-                  CANCELAR CARTELA
+                  TODOS SORTEIOS
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <CancelarCartela />
+                  <TodosSorteios />
                 </v-expansion-panel-content>
               </v-expansion-panel>
+
             </v-expansion-panels>
+
           </v-col>
         </v-row>
       </v-container>
@@ -66,7 +69,7 @@ export default {
   },
   data(){
     return {
-      panel: [0]
+      panel: [1]
     }
   },
 

@@ -198,7 +198,7 @@ async function todosOsSorteios(){
 }
 
 async function getGanhadores(){
-  return axios.get(`http://192.168.0.11:8080/api/ganhador`,
+  return axios.get(`http://192.168.0.11:8080/api/ganhador?sort=id,desc`,
   {
     withCredentials: false,
     headers: {

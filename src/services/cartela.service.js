@@ -39,7 +39,45 @@ async function postTicket(id_cliente, numeros){
   })
 }
 
-async function getTicket(id_cliente){
+async function getTicketAtivo(id_cliente){
+  return axios.get(`http://192.168.0.11:8080/api/ticket/busca/ativo/${id_cliente}`,
+  {
+    withCredentials: false,
+    headers: {
+      'Content-Type':'application/json',
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    },
+    auth: {
+      username: localStorage.getItem('user'),
+      password: localStorage.getItem('pass')
+    }
+  }).then((result) => {
+    return result.data
+  })
+}
+
+async function ultimosSorteios(){
+  return axios.get('http://192.168.0.11:8080/api/cartela/ultimo', 
+  {
+    withCredentials: false,
+    headers: {
+      'Content-Type':'application/json',
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      'Access-Control-Allow-Headers':'*'
+    },
+    auth: {
+      username: localStorage.getItem('user'),
+      password: localStorage.getItem('pass')
+    }
+  }
+  ).then((result) => {
+    return result.data
+  })
+}
+
+async function getTicketTodos(id_cliente){
   return axios.get(`http://192.168.0.11:8080/api/ticket/busca/${id_cliente}`,
   {
     withCredentials: false,
@@ -58,7 +96,7 @@ async function getTicket(id_cliente){
 }
 
 async function getGanhadores(){
-  return axios.get(`http://192.168.0.11:8080/api/ganhador`,
+  return axios.get(`http://192.168.0.11:8080/api/ganhador?sort=id,desc`,
   {
     withCredentials: false,
     headers: {
@@ -78,6 +116,8 @@ async function getGanhadores(){
 export {
   getCartela,
   postTicket,
-  getTicket,
-  getGanhadores
+  getTicketAtivo,
+  getTicketTodos,
+  getGanhadores,
+  ultimosSorteios
 }

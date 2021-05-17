@@ -16,7 +16,7 @@
             >
               <v-expansion-panel>
                 <v-expansion-panel-header>
-                  BUSCAR POR CLIENTE
+                  BUSCAR AGENTE
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
 
@@ -92,32 +92,7 @@
                   </v-form>
 
                   <v-row>
-                    <v-col >
-                      <v-expansion-panels>
-                        <v-expansion-panel>
-                          <v-expansion-panel-header>
-                            INSERIR SALDO
-                          </v-expansion-panel-header>
-                          <v-expansion-panel-content>
-                            <v-form>
-                              <v-text-field
-                                label="INSERIR"
-                                v-model="saldo"
-                              ></v-text-field>  
-                              <div class="text-center">
-                                <v-btn
-                                  @click="inserirSaldo()"
-                                >
-                                  INSERIR
-                                </v-btn>
-                              </div>
-                            </v-form>
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-expansion-panels>
-                    </v-col>
-                    <v-col
-                    >
+                    <v-col>
                       <v-expansion-panels>
                         <v-expansion-panel>
                           <v-expansion-panel-header>
@@ -234,10 +209,6 @@ export default {
       }
     },
 
-    async inserirSaldo(){
-      const response = await updateSaldo(this.id, this.saldo)
-      this.saldoAtual = response.saldo
-    },
 
     async debitaSaldo(){
       const response = await debitarSaldo(this.id, this.debitar)

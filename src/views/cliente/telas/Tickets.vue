@@ -2,11 +2,12 @@
   <v-container>
     <div class="text-center">
       <h1 class="text-center mt-10">Meus Tickets</h1>
-      <v-btn class="mr-2">ativos</v-btn>
-      <v-btn class="ml-2">todos</v-btn>
+      <v-btn @click="buscarAtivos" :color="buttons.ativo" class="mr-2">ativos</v-btn>
+      <v-btn @click="buscarTodos" :color="buttons.todos" class="ml-2">todos</v-btn>
     </div>
     <v-row
       no-gutters
+      v-if="tickets"
     > 
       <v-col
         xs="6"
@@ -33,22 +34,51 @@
 </template>
 
 <script>
-import {getTicket} from '../../../services/cartela.service'
+import {getTicketAtivo, getTicketTodos} from '../../../services/cartela.service'
 import {mapGetters} from 'vuex'
 
 export default {
   data(){
     return {
       tickets: [],
-      numeros: []
+      numeros: [],
+      buttons: {
+        ativo: 'success',
+        todos: ''
+      }
     }
   },
   computed: {
     ...mapGetters(['getInformacoes'])
   },
   async created(){
-    this.tickets = await getTicket(this.getInformacoes.id)
+    await this.buscarAtivos()
+  },
+
+  methods: {
+    async buscarAtivos(){
+      try{
+        this.tickets = await getTicketAtivo(this.getInformacoes.id)
+        this.buttons.ativo = 'success'
+        this.buttons.todos = ''
+      }catch(e){
+
+      }
+    },
+
+    async buscarTodos(){
+      try{
+        this.tickets = await getTicketTodos(this.getInformacoes.id)
+        this.buttons.ativo = ''
+        this.buttons.todos = 'success'
+      }catch(e){
+
+      }
+    }
+
+
   }
+
 }
 </script>
 

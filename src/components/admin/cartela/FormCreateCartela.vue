@@ -6,14 +6,14 @@
       <v-text-field
         v-model="valor"
         label="Valor"
-        v-mask="'###.###'"
+        v-mask="'######'"
         :rules="[rules.required]"
         required
       ></v-text-field>
       <v-text-field
         v-model="valor_ticket"
         label="Valor do Ticket"
-        v-mask="'###'"
+        v-mask="'####'"
         :rules="[rules.required]"
         required
       ></v-text-field>

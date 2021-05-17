@@ -1,0 +1,130 @@
+<template>
+  <v-container>
+    <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+    >
+      <v-row>
+        <v-col
+          cols="12"
+        >
+          <v-text-field
+            label="nome"
+            v-model="nome"
+            :rules="nomeRules"
+            required
+          >
+          </v-text-field>  
+        </v-col>
+    
+        <v-col
+          cols="12"
+        >
+          <v-text-field
+            label="telefone"
+            v-model="telefone"
+            required
+          >
+          </v-text-field>  
+        </v-col>
+        <v-col cols="12">
+          <v-text-field
+            label="celular"
+            v-model="celular"
+            :rules="celularRules"
+            required
+          >
+          </v-text-field>  
+        </v-col>
+
+        <v-col cols="12">
+          <v-text-field
+            label="cpf"
+            v-model="cpf"
+            :rules="cpfRules"
+            v-mask="'###.###.###-##'"
+            required
+          >
+          </v-text-field>  
+        </v-col>
+
+        <v-col cols="12">
+          <v-text-field
+            label="cidade"
+            v-model="cidade"
+            :rules="cidadeRules"
+            required
+          >
+          </v-text-field>  
+        </v-col>
+
+        <v-col cols="12">
+          <v-text-field
+            label="estado"
+            v-model="estado"
+            :rules="estadoRules"
+            required
+          >
+          </v-text-field>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="12" class="text-center">
+          <v-btn
+            height="50"
+            color="success"
+            @click="enviar()"
+          >
+            Enviar
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+  </v-container>
+</template>
+
+<script>
+export default {
+
+  data(){
+    return {
+      valid: true,
+      nome: '',
+      nomeRules: [
+        v => !!v || 'Nome é obrigatório',
+      ],
+      telefone: '',
+      celular: '',
+      celularRules: [
+        v => !!v || 'Celular é obrigatório',
+      ],
+      cpf: '',
+      cpfRules: [
+        v => !!v || 'CPF é obrigatório',
+      ],
+      estado: '',
+      estadoRules: [
+        v => !!v || 'Estado é obrigatório',
+      ],
+      cidade: '',
+      cidadeRules: [
+        v => !!v || 'Cidade é obrigatório',
+      ],
+    }
+  },
+  methods: {
+    enviar(){
+      if(this.$refs.form.validate()){
+        
+      }
+    }
+  }
+
+}
+</script>
+
+<style>
+
+</style>
