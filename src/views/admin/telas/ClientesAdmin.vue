@@ -65,7 +65,7 @@
                       </v-col>
                       <v-col>
                         <v-btn
-                          @click="getById()"
+                          @click="getByCliente()"
                         >
                           Buscar
                         </v-btn>
@@ -184,7 +184,7 @@
 </template>
 
 <script>
-import {getClienteById, debitarSaldo, updateSaldo} from '../../../services/admin.service'
+import {getClienteById, debitarSaldo, updateSaldo, getByCpf} from '../../../services/admin.service'
 
 export default {
   data(){
@@ -209,7 +209,7 @@ export default {
     }
   },
   methods: {
-    async getById(){
+    async getByCliente(){
       try{
         this.saldo = 0
         this.debitar = 0
@@ -220,9 +220,10 @@ export default {
           this.visualizarId = true
         }
         if(this.radioButton === 'cpf'){
-          const response = await getClienteById(this.id)
-          this.nome = response.body.nome  
-          this.saldoAtual = response.body.saldo  
+          const response = await getByCpf(this.id)
+          console.log(response);
+          this.nome = response.nome  
+          this.saldoAtual = response.saldo  
           this.visualizarId = true
         }
       }catch(e){
