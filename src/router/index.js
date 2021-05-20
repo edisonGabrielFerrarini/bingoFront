@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/form/Login'
+import LoginAdmin from '../views/form/LoginAdmin'
 import Cliente from '../views/cliente/Cliente'
 import Cartela from '../views/cliente/telas/Cartela'
 import Ticket from '../views/cliente/telas/Tickets'
@@ -24,6 +25,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/login_admin',
+    name: 'LoginAdmin',
+    component: LoginAdmin
   },
   {
     path: '/admin',

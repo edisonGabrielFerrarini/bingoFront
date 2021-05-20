@@ -11,11 +11,12 @@ const config = {
   auth: {
     username: 'adminGameSena@Hotmail.com.br',
     password: '0f1324de378fb2e399bc66843abb736ca47eb638b6a05bacb23a82efb5ffd62b'
-  }
+  },
+  server: 'http://192.168.0.11:8080'
 }
 
 async function createCartela(cartela){
-  return axios.post('http://192.168.0.11:8080/api/cartela',
+  return axios.post(config.server + '/api/cartela',
   {
     'numeros_sorteados': cartela.numeros_sorteados,
     'ativa': cartela.ativa,
@@ -34,7 +35,7 @@ async function createCartela(cartela){
 }
 
 async function sorteia(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/sorteia', 
+  return axios.get(config.server + '/api/cartela/sorteia', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -46,7 +47,7 @@ async function sorteia(){
 }
 
 async function getClienteById(id){
-  return axios.get(`http://192.168.0.11:8080/api/cliente/admin/busca/${id}`, 
+  return axios.get(config.server + `/api/cliente/admin/busca/${id}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -58,7 +59,7 @@ async function getClienteById(id){
 }
 
 async function getByCpf(cpf){
-  return axios.get(`http://192.168.0.11:8080/api/cliente/admin/busca/cpf/${cpf}`, 
+  return axios.get(config.server + `/api/cliente/admin/busca/cpf/${cpf}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -71,7 +72,7 @@ async function getByCpf(cpf){
 
 
 async function updateSaldo(id, saldo){
-  return axios.put(`http://192.168.0.11:8080/api/cliente/update/saldo/${id}`,
+  return axios.put(config.server + `/api/cliente/update/saldo/${id}`,
   {
     'saldo': saldo
   }, 
@@ -86,7 +87,7 @@ async function updateSaldo(id, saldo){
 }
 
 async function debitarSaldo(id, saldo){
-  return axios.put(`http://192.168.0.11:8080/api/cliente/debita/saldo/${id}`, 
+  return axios.put( config.server + `/api/cliente/debita/saldo/${id}`, 
   {
     'saldo': saldo
   }, 
@@ -101,7 +102,7 @@ async function debitarSaldo(id, saldo){
 }
 
 async function obterCartelaAtiva(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/rendimento', 
+  return axios.get(config.server + '/api/cartela/rendimento', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -113,7 +114,7 @@ async function obterCartelaAtiva(){
 }
 
 async function cancelarCartela(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/cancela', 
+  return axios.get(config.server + '/api/cartela/cancela', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -125,7 +126,7 @@ async function cancelarCartela(){
 }
 
 async function ultimosSorteios(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/ultimo', 
+  return axios.get(config.server + '/api/cartela/ultimo', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -137,7 +138,7 @@ async function ultimosSorteios(){
 }
 
 async function todosOsSorteios(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/all?sort=id,desc', 
+  return axios.get(config.server + '/api/cartela/all?sort=id,desc', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -149,7 +150,7 @@ async function todosOsSorteios(){
 }
 
 async function getAllAgentes(){
-  return axios.get('http://192.168.0.11:8080/api/agente', 
+  return axios.get(config.server + '/api/agente', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -160,8 +161,19 @@ async function getAllAgentes(){
   })
 }
 
+async function getAllGanhadores(){
+  return axios.get(config.server + `/api/ganhador?sort=id,desc`,
+  {
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
+  }).then((result) => {
+    return result.data
+  })
+}
+
 async function getAllGerentes(){
-  return axios.get('http://192.168.0.11:8080/api/gerente', 
+  return axios.get(config.server + '/api/gerente', 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -173,7 +185,7 @@ async function getAllGerentes(){
 }
 
 async function getGanhadores(){
-  return axios.get(`http://192.168.0.11:8080/api/ganhador?sort=id,desc`,
+  return axios.get(config.server + `/api/ganhador?sort=id,desc`,
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -184,7 +196,7 @@ async function getGanhadores(){
 }
 
 async function formGerente(gerente){
-  return axios.post('http://192.168.0.11:8080/api/gerente',
+  return axios.post(config.server + '/api/gerente',
   {
     'nome': gerente.nome,
     'telefone': gerente.telefone,
@@ -204,7 +216,7 @@ async function formGerente(gerente){
 }
 
 async function formAgente(agente){
-  return axios.post('http://192.168.0.11:8080/api/agente',
+  return axios.post(config.server + '/api/agente',
   {
     'nome': agente.nome,
     'telefone': agente.telefone,
@@ -226,7 +238,7 @@ async function formAgente(agente){
 }
 
 async function getGerenteById(id){
-  return axios.get(`http://192.168.0.11:8080/api/gerente/id/${id}`, 
+  return axios.get(config.server + `/api/gerente/id/${id}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -238,7 +250,7 @@ async function getGerenteById(id){
 }
 
 async function getGerenteByCPF(cpf){
-  return axios.get(`http://192.168.0.11:8080/api/gerente/cpf/${cpf}`, 
+  return axios.get(config.server + `/api/gerente/cpf/${cpf}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -250,7 +262,7 @@ async function getGerenteByCPF(cpf){
 }
 
 async function getAgenteByCPF(cpf){
-  return axios.get(`http://192.168.0.11:8080/api/agente/cpf/${cpf}`, 
+  return axios.get(config.server + `/api/agente/cpf/${cpf}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -262,7 +274,7 @@ async function getAgenteByCPF(cpf){
 }
 
 async function getAgenteById(id){
-  return axios.get(`http://192.168.0.11:8080/api/gerente/id/${id}`, 
+  return axios.get(config.server + `/api/gerente/id/${id}`, 
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
@@ -292,5 +304,6 @@ export {
   getAgenteByCPF,
   getAgenteById,
   getAllGerentes,
-  getAllAgentes
+  getAllAgentes,
+  getAllGanhadores
 }

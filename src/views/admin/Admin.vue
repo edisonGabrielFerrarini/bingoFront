@@ -8,7 +8,7 @@
         color="grey lighten-4"
         class="pa-4"
       >
-        <div>john@vuetifyjs.com</div>
+        <div>{{getEmail.split("@")[0]}}</div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -29,6 +29,21 @@
             </v-list-item-content>
           </v-list-item>
         </router-link>
+
+
+        <a
+          @click="sair()"
+        >
+          <v-list-item> 
+            <v-list-item-icon>
+              <v-icon>mdi-exit-run</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Sair</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </a>
       </v-list>  
     </v-navigation-drawer>
 
@@ -38,6 +53,8 @@
 </template>
 
 <script>
+  import {mapActions, mapGetters} from 'vuex'
+  import { getUserAdmin } from '../../services/login.service'
   export default {
     data: () => ({
       cards: ['Today'],
@@ -51,8 +68,32 @@
         ['mdi-badge-account-horizontal', 'Admins', 'configura'],
         ['mdi-account-tie', 'Gerentes', 'gerente'],
         ['mdi-account-tie-outline', 'Agentes', 'agente'],
+        ['mdi-exit-run', ]
       ],
     }),
+    methods: {
+      ...mapActions(['actionEmail']),
+
+      sair(){
+        localStorage.clear()
+        this.$router.push('/login_admin')
+      }
+    },
+    computed: {
+      ...mapGetters(['getEmail'])
+    },
+    async created(){
+      if(localStorage.getItem('userAdmin') && localStorage.getItem('passAdmin')){
+        const admin = await getUserAdmin(localStorage.getItem('user'), localStorage.getItem('pass'))
+        console.log(admin);
+          if(admin.status === 200){
+            this.actionEmail(admin.data)
+          }
+        }
+      if(this.getEmail == null){
+        this.$router.push('LoginAdmin')
+      }
+    },
   }
 </script>
 <style>

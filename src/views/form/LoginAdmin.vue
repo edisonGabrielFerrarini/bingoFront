@@ -74,8 +74,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import { getUser } from '../../services/login.service'
+  import { getUserAdmin } from '../../services/login.service'
   import { validationMixin } from 'vuelidate'
   import { required, maxLength, email, password} from 'vuelidate/lib/validators'
 
@@ -105,14 +104,12 @@
 
 
     async created(){
-      if(localStorage.getItem('user') && localStorage.getItem('pass')){
-        this.$router.push('cliente/cartela')
+      if(localStorage.getItem('userAdmin') && localStorage.getItem('passAdmin')){
+        this.$router.push('admin/cartela-admin')
       }
     },
 
     methods: {
-      ...mapActions(['actionInformacoes']),
-      
       submit () {
         if(this.$refs.form.validate()){
           this.init()
@@ -121,19 +118,16 @@
 
       async init(){
         try{
-          const usuario = await getUser(this.email, this.password)
+          const usuario = await getUserAdmin(this.email, this.password)
           localStorage.clear()
             if(usuario.status === 200){
-              this.actionInformacoes(usuario.data)
-              localStorage.setItem('pass', this.password)
-              localStorage.setItem('user', this.email)
-              this.$router.push('cliente/cartela')
+              localStorage.setItem('passAdmin', this.password)
+              localStorage.setItem('userAdmin', this.email)
+              this.$router.push('admin/cartela-admin')
             }
         }catch(e){
           this.snackbar = true
         }
-
-
       }
     },
   }

@@ -3,6 +3,27 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const modulesAdmin = {
+  state: {
+    email: null
+  },
+  getters: {
+    getEmail(state){
+      return state.email
+    }
+  },
+  mutations: {
+    setEmail(state, email){
+      state.email = email
+    },
+  },
+  actions: {
+    actionEmail({commit}, payload){
+      commit('setEmail', payload)
+    },
+  }
+}
+
 const modulesCliente = {
   state: {
     informacoes: {
@@ -88,7 +109,8 @@ export default new Vuex.Store({
   },
   modules: {
     cliente: modulesCliente,
-    snackBar: modulesSnackBar
+    snackBar: modulesSnackBar,
+    admin: modulesAdmin
   }
 })
 

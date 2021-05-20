@@ -1,19 +1,26 @@
 import axios from 'axios'
 
+const config = {
+  headers: {
+    'Content-Type':'application/json',
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+  },
+  withCredentials: false,
+  auth: {
+    username: localStorage.getItem('user'),
+    password: localStorage.getItem('pass')
+  },
+  server: 'http://192.168.0.11:8080'
+}
+
+
 async function getCartela(){
-  return axios.get('http://192.168.0.11:8080/api/cartela', 
+  return axios.get(config.server + '/api/cartela', 
     {
-      withCredentials: false,
-      headers: {
-        'Content-Type':'application/json',
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Access-Control-Allow-Headers':'*'
-      },
-      auth: {
-        username: localStorage.getItem('user'),
-        password: localStorage.getItem('pass')
-      }
+      withCredentials: config.withCredentials,
+      headers: config.headers,
+      auth: config.auth
     }
   ).then((result) => {
     return result.data
@@ -21,56 +28,34 @@ async function getCartela(){
 }
 
 async function postTicket(id_cliente, numeros){
-  return axios.post('http://192.168.0.11:8080/api/ticket', {
+  return axios.post(config.server + '/api/ticket', {
     'id_cliente': id_cliente,
     'numeros': `[${numeros.toString()}]`
   },
   {
-    withCredentials: false,
-    headers: {
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    },
-    auth: {
-      username: localStorage.getItem('user'),
-      password: localStorage.getItem('pass')
-    }
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
   })
 }
 
 async function getTicketAtivo(id_cliente){
-  return axios.get(`http://192.168.0.11:8080/api/ticket/busca/ativo/${id_cliente}`,
+  return axios.get(config.server + `/api/ticket/busca/ativo/${id_cliente}`,
   {
-    withCredentials: false,
-    headers: {
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    },
-    auth: {
-      username: localStorage.getItem('user'),
-      password: localStorage.getItem('pass')
-    }
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
   }).then((result) => {
     return result.data
   })
 }
 
 async function ultimosSorteios(){
-  return axios.get('http://192.168.0.11:8080/api/cartela/ultimo', 
+  return axios.get(config.server + '/api/cartela/ultimo', 
   {
-    withCredentials: false,
-    headers: {
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      'Access-Control-Allow-Headers':'*'
-    },
-    auth: {
-      username: localStorage.getItem('user'),
-      password: localStorage.getItem('pass')
-    }
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
   }
   ).then((result) => {
     return result.data
@@ -78,36 +63,22 @@ async function ultimosSorteios(){
 }
 
 async function getTicketTodos(id_cliente){
-  return axios.get(`http://192.168.0.11:8080/api/ticket/busca/${id_cliente}`,
+  return axios.get(config.server + `/api/ticket/busca/${id_cliente}`,
   {
-    withCredentials: false,
-    headers: {
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    },
-    auth: {
-      username: localStorage.getItem('user'),
-      password: localStorage.getItem('pass')
-    }
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
   }).then((result) => {
     return result.data
   })
 }
 
 async function getGanhadores(){
-  return axios.get(`http://192.168.0.11:8080/api/ganhador?sort=id,desc`,
+  return axios.get(config.server + `/api/ganhador?sort=id,desc`,
   {
-    withCredentials: false,
-    headers: {
-      'Content-Type':'application/json',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    },
-    auth: {
-      username: localStorage.getItem('user'),
-      password: localStorage.getItem('pass')
-    }
+    withCredentials: config.withCredentials,
+    headers: config.headers,
+    auth: config.auth
   }).then((result) => {
     return result.data
   })

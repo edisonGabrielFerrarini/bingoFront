@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {getGanhadores} from '../../../services/cartela.service'
+import {getAllGanhadores} from '../../../services/admin.service'
 export default {
   data(){
     return {
@@ -43,7 +43,7 @@ export default {
     }
   },
   async created(){
-    var responseGanhadores = await getGanhadores()
+    var responseGanhadores = await getAllGanhadores()
     responseGanhadores.content.map((it)=>{
       this.ganhadores.push(it)
     })

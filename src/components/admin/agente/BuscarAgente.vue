@@ -63,40 +63,19 @@
                       disabled
                     ></v-text-field>  
                     <v-text-field
-                      label="SALDO"
-                      v-model="saldoAtual"
+                      label="Celular"
+                      v-model="celular"
                       disabled
-                    ></v-text-field>          
+                    ></v-text-field>  
+                    <v-text-field
+                      label="Estado"
+                      v-model="estado"
+                      disabled
+                    ></v-text-field>  
+                             
                   </v-col>
                 </v-row>
               </v-form>
-
-              <v-row>
-                <v-col>
-                  <v-expansion-panels>
-                    <v-expansion-panel>
-                      <v-expansion-panel-header>
-                        DEBITAR SALDO
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content>
-                        <v-form>
-                          <v-text-field
-                            label="DEBITAR"
-                            v-model="debitar"
-                          ></v-text-field> 
-                          <div class="text-center">
-                            <v-btn
-                              @click="debitaSaldo()"
-                            >
-                              DEBITAR
-                            </v-btn>
-                          </div> 
-                        </v-form>
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </v-col> 
-              </v-row>
             </div>
 
         <v-dialog
@@ -138,12 +117,12 @@ export default {
   data(){
     return {
       nome: '',
+      celular: '',
+      estado: '',
       radioButton: 'id',
       id: null,
       cpf: null,
-      saldo: null,
       debitar: null,
-      saldoAtual: 0,
       visualizarId: false,
       visualizarCPF: false,
       dialog: {
@@ -159,18 +138,18 @@ export default {
   methods: {
     async getById(){
       try{
-        this.saldo = 0
-        this.debitar = 0
         if(this.radioButton === 'id'){
           const response = await getAgenteById(this.id)
           this.nome = response.nome  
-          // this.saldoAtual = response.body.saldo  
+          this.celular = response.celular
+          this.estado = response.estado
           this.visualizarId = true
         }
         if(this.radioButton === 'cpf'){
           const response = await getAgenteByCPF(this.id)
           this.nome = response.nome  
-          // this.saldoAtual = response.body.saldo  
+          this.celular = response.celular
+          this.estado = response.estado
           this.visualizarId = true
         }
       }catch(e){
@@ -181,12 +160,6 @@ export default {
         this.dialog.color = 'error'
       }
     },
-
-    async debitaSaldo(){
-      const response = await debitarSaldo(this.id, this.debitar)
-      this.saldoAtual = response.body.saldo
-    }
-
   }
 
 }

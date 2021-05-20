@@ -16,11 +16,17 @@
         </div>
       </v-col>
     </v-row>
-    <v-row v-if="validar">
+    <v-row 
+      class="mt-10"
+      v-if="validar"
+    >
       <v-simple-table>
         <template v-slot:default>
           <thead>
             <tr>
+              <th>
+                id
+              </th>
               <th>
                 Nome
               </th>
@@ -40,22 +46,23 @@
                 Id Gerente
               </th>
               <th>
-                Vendas
+                Nome Gerente
               </th>
             </tr>
           </thead>
           <tbody>
             <tr
               v-for="dado in dados"
-              :key="dado.cpf"
+              :key="dado.id"
             >
+              <td>{{dado.id}}</td>
               <td>{{dado.nome}}</td>
               <td>{{dado.celular}}</td>
               <td>{{dado.cpf}}</td>
               <td>{{dado.cidade}}</td>
               <td>{{dado.estado}}</td>
               <td>{{dado.id_gerente}}</td>
-              <td>{{dado.porcentual_venda}}</td>
+              <td>{{dado.nome_gerente}}</td>
             </tr>
           </tbody>
         </template>

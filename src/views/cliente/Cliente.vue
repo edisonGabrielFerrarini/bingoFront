@@ -33,7 +33,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getInformacoes'])
+    ...mapGetters(['getEmail'])
   },
   methods: {
     ...mapActions(['actionInformacoes']),
