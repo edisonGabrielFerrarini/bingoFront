@@ -16,6 +16,7 @@ const config = {
 
 
 async function getCartela(){
+  console.log(localStorage.getItem('user'));
   return axios.get(config.server + '/api/cartela', 
     {
       withCredentials: config.withCredentials,

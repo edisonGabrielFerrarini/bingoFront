@@ -84,8 +84,7 @@
     },
     async created(){
       if(localStorage.getItem('userAdmin') && localStorage.getItem('passAdmin')){
-        const admin = await getUserAdmin(localStorage.getItem('user'), localStorage.getItem('pass'))
-        console.log(admin);
+        const admin = await getUserAdmin(localStorage.getItem('userAdmin'), localStorage.getItem('passAdmin'))
           if(admin.status === 200){
             this.actionEmail(admin.data)
           }

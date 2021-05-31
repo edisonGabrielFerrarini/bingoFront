@@ -47,7 +47,6 @@ async function getUserAdmin(email, pass){
     passAdmin = pass
   }
   
-  
   return axios.get('http://192.168.0.11:8080/api/users/login_admin',
   {
     withCredentials: false,

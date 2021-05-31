@@ -6,7 +6,7 @@
   >
     <v-card-text>
       <Premiacao :valor="premio"/>
-        <p>Cartela nº {{idCartela}}</p>
+        <p>Sorteio nº {{idCartela}}</p>
       <v-flex>
         <v-card-text
           class=" my-5"

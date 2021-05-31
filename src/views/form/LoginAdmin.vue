@@ -119,7 +119,6 @@
       async init(){
         try{
           const usuario = await getUserAdmin(this.email, this.password)
-          localStorage.clear()
             if(usuario.status === 200){
               localStorage.setItem('passAdmin', this.password)
               localStorage.setItem('userAdmin', this.email)

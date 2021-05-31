@@ -34,8 +34,11 @@ async function createCartela(cartela){
   })
 }
 
-async function sorteia(){
-  return axios.get(config.server + '/api/cartela/sorteia', 
+async function sorteia(numeros){
+  return axios.post(config.server + '/api/cartela/sorteia', 
+  {
+    'numeros': `[${numeros.toString()}]`
+  },
   {
     withCredentials: config.withCredentials,
     headers: config.headers,
