@@ -16,6 +16,7 @@ import Gerente from '../views/admin/telas/Gerente'
 import GanhadoresAdmin from '../views/admin/telas/GanhadoresAdmin'
 import Sorteios from '../views/cliente/telas/Sorteios'
 import Sorteio from '../views/admin/telas/Sorteio'
+import Cadastro from '../views/form/Cadastro.vue'
 
 
 Vue.use(VueRouter)
@@ -25,6 +26,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: Cadastro
   },
   {
     path: '/login_admin',

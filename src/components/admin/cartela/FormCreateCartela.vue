@@ -109,6 +109,9 @@ export default {
           this.dialog.text = 'Criado com Sucesso'
           this.dialog.icon = 'mdi-thumb-up'
           this.dialog.color = 'green'
+
+          this.$refs.form.reset()
+          this.$refs.form.resetValidation()
           
         }
         }catch(e){

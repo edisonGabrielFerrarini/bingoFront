@@ -14,6 +14,31 @@ const config = {
   server: 'http://192.168.0.11:8080'
 }
 
+async function createUser(payload){
+  console.log(payload);
+  return axios.post(config.server + '/api/users/cadastro',
+    {       
+      'senha': payload.senha,
+      'email': payload.email,
+      'cliente': {
+        'nome': payload.nome,
+        'telefone': payload.telefone,
+        'celular': payload.celular,
+        'cidade': payload.cidade,
+        'estado': payload.estado,
+        'cpf': payload.cpf,
+        'ganhos': 0,
+        'saldo': 0
+    }
+    }, 
+    {
+      withCredentials: config.withCredentials,
+      headers: config.headers,
+    }
+  ).then((result) => {
+    return result.data
+  })
+}
 
 async function getCartela(){
   console.log(localStorage.getItem('user'));
@@ -91,5 +116,6 @@ export {
   getTicketAtivo,
   getTicketTodos,
   getGanhadores,
-  ultimosSorteios
+  ultimosSorteios,
+  createUser
 }

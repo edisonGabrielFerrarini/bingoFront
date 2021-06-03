@@ -48,6 +48,7 @@
     >
       <v-btn
         width="40%"
+        @click="cadastro"
       >
         Cadastre-se
       </v-btn>
@@ -113,6 +114,10 @@
     methods: {
       ...mapActions(['actionInformacoes']),
       
+      cadastro(){
+        this.$router.push('/cadastro')
+      },
+
       submit () {
         if(this.$refs.form.validate()){
           this.init()
