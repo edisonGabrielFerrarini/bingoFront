@@ -6,6 +6,7 @@
           height="50"
           color="info"
           @click="sortear()"
+          class="mb-5"
         >buscar ativa</v-btn>
       </div>
 
@@ -14,18 +15,26 @@
         <v-text-field
           label="Concurso"
           v-model="cartela.id"
+          filled
+          readonly
         ></v-text-field>
         <v-text-field
           label="Valor por Ticket"
           v-model="cartela.valor_ticket"
+          filled
+          readonly
         ></v-text-field>
         <v-text-field
           label="Prêmio"
           v-model="cartela.valor"
+          filled
+          readonly
         ></v-text-field>
         <v-text-field
           label="Rendimentos da Cartela Ativa"
           v-model="cartela.rendimentos"
+          filled
+          readonly
         ></v-text-field>
       </v-form>
     </div>

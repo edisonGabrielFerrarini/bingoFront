@@ -24,6 +24,7 @@
           <v-text-field
             label="telefone"
             v-model="telefone"
+            v-mask="'(##) #####-####'"
             required
           >
           </v-text-field>  
@@ -32,6 +33,7 @@
           <v-text-field
             label="celular"
             v-model="celular"
+            v-mask="'(##) #####-####'"
             :rules="celularRules"
             required
           >

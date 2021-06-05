@@ -61,6 +61,7 @@
                         <v-text-field
                           label=""
                           v-model="id"
+                          v-mask="'################'"
                         ></v-text-field>                        
                       </v-col>
                       <v-col>

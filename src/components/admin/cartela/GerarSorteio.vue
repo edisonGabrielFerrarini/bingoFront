@@ -19,6 +19,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_um"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
             </v-text-field>  
@@ -30,6 +31,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_dois"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
             </v-text-field>  
@@ -41,6 +43,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_tres"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
             </v-text-field>  
@@ -52,6 +55,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_quatro"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
           </v-text-field>  
@@ -63,6 +67,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_cinco"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
             </v-text-field>  
@@ -74,6 +79,7 @@
             <v-text-field
               v-model="numeros_sorteio.numero_seis"
               :rules="numeros_sorteio.numeroRules"
+              v-mask="'##'"
               required
             >
             </v-text-field>  

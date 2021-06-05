@@ -14,15 +14,15 @@
         <v-text-field
           label="ID"
           loading
-          disabled
           color="success"
           filled
+          readonly
           v-model="getInformacoes.id"
         ></v-text-field>
         <v-text-field
           label="Saldo"
           loading
-          disabled
+          readonly
           filled
           color="warning"
           v-model="getInformacoes.saldo"
@@ -30,7 +30,7 @@
         <v-text-field
           label="Nome"
           loading
-          disabled
+          readonly
           filled
           color="primary"
           v-model="getInformacoes.nome"
@@ -38,7 +38,7 @@
         <v-text-field
           label="Cidade"
           loading
-          disabled
+          readonly
           filled
           color="black"
           v-model="getInformacoes.cidade"
@@ -46,7 +46,7 @@
         <v-text-field
           label="CPF"
           loading
-          disabled
+          readonly
           filled
           color="red"
           v-model="getInformacoes.cpf"
@@ -54,7 +54,7 @@
         <v-text-field
           label="Celular"
           loading
-          disabled
+          readonly
           filled
           color="yellow"
           v-model="getInformacoes.celular"
@@ -62,7 +62,7 @@
         <v-text-field
           label="Telefone"
           loading
-          disabled
+          readonly
           filled
           color="purple"
           v-model="getInformacoes.telefone"
