@@ -104,6 +104,7 @@ export default {
     }
   },
   created(){
+    this.$forceUpdate()
     this.init()
   },  
   methods: {
