@@ -22,7 +22,6 @@ export default {
     }
   },
   async created(){
-    this.$forceUpdate()
     if(localStorage.getItem('user') && localStorage.getItem('pass')){
         const usuario = await getUser(localStorage.getItem('user'), localStorage.getItem('pass'))
         if(usuario.status === 200){
