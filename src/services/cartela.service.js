@@ -11,7 +11,7 @@ const config = {
     username: localStorage.getItem('user'),
     password: localStorage.getItem('pass')
   },
-  server: 'https://app-back-game-sena.herokuapp.com:59191'
+  server: 'https://app-back-game-sena.herokuapp.com'
 }
 
 async function createUser(payload){
