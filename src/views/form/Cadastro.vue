@@ -138,6 +138,7 @@ export default {
     async init() {
       try {
         await createUser(this.payload);
+        this.$router.go(0)
         this.$router.push("/login");
       } catch (e) {
         this.snackbar = true;
