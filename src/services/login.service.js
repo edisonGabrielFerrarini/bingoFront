@@ -13,7 +13,7 @@ async function getUser(email, pass){
   }
   
   
-  return axios.post('http://192.168.0.11:8080/api/users/login',{
+  return axios.post('https://app-back-game-sena.herokuapp.com:59191/api/users/login',{
     'email': emailCliente
   },
   {
@@ -47,7 +47,7 @@ async function getUserAdmin(email, pass){
     passAdmin = pass
   }
   
-  return axios.get('http://192.168.0.11:8080/api/users/login_admin',
+  return axios.get('https://app-back-game-sena.herokuapp.com:59191/api/users/login_admin',
   {
     withCredentials: false,
     headers: {

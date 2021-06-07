@@ -12,7 +12,7 @@ const config = {
     username: 'adminGameSena@Hotmail.com.br',
     password: '0f1324de378fb2e399bc66843abb736ca47eb638b6a05bacb23a82efb5ffd62b'
   },
-  server: 'http://192.168.0.11:8080'
+  server: 'https://app-back-game-sena.herokuapp.com:59191'
 }
 
 async function createCartela(cartela){
