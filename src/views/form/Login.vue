@@ -106,6 +106,7 @@
 
 
     async created(){
+      this.$forceUpdate()
       if(localStorage.getItem('user') && localStorage.getItem('pass')){
         this.$router.push('cliente/cartela')
       }
