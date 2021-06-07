@@ -26,7 +26,7 @@ async function createUser(payload){
         'celular': payload.celular,
         'cidade': payload.cidade,
         'estado': payload.estado,
-        'cpf': payload.cpf,
+        'cpf': payload.cpf.replaceAll(".","").replaceAll("-",""),
         'ganhos': 0,
         'saldo': 0
     }

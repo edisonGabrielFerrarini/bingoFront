@@ -81,12 +81,14 @@
                         <v-text-field
                           label="NOME"
                           v-model="nome"
-                          disabled
+                          readonly
+                          filled
                         ></v-text-field>  
                         <v-text-field
                           label="SALDO"
                           v-model="saldoAtual"
-                          disabled
+                          readonly
+                          filled
                         ></v-text-field>          
                       </v-col>
                     </v-row>

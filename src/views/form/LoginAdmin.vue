@@ -46,11 +46,6 @@
     <div
       class="mt-5"
     >
-      <v-btn
-        width="40%"
-      >
-        Cadastre-se
-      </v-btn>
     </div>
   </v-form>
   </v-card-text>
