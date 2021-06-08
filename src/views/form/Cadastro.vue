@@ -11,6 +11,7 @@
 
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
+            type="email"
             label="email"
             v-model="payload.email"
             :rules="emailRules"
